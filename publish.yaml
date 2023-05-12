@@ -18,7 +18,7 @@ Category: 基础云服务 # 基础云服务/Web框架/全栈应用/人工智能/
 Commands: # 指令，格式为指令：指令描述，例如：
   list: 列出应用列表
   upgrade: 版本更新
-  scale: 扩容缩容
+  rescale: 扩容缩容
 Properties:
   appId:
     Description: 应用ID
