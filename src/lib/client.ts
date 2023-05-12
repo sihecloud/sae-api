@@ -13,7 +13,7 @@ export default class Client {
             apiVersion: "2019-05-06",
         });
 
-        const body = `{}`;
+        const queries = {};
         const headers = {
             "Content-Type": "application/json",
         };
@@ -29,8 +29,7 @@ export default class Client {
          * @returns 应用列表
          */
         saeClient.listApplications = async function () {
-            const queries = {};
-            const data = await saeClient.request("GET", ListApplicationsUri, queries, body, headers, requestOption);
+            const data = await saeClient.request("GET", ListApplicationsUri, queries, ``, headers, requestOption);
             return data;
         }
 
@@ -41,10 +40,10 @@ export default class Client {
          * @returns 操作结果
          */
         saeClient.rescaleApplication = async function (appId: string, replicas: number) {
-            const queries = {
+            const body = JSON.stringify({
                 "appId": appId,
                 "replicas": replicas,
-            };
+            });
             const data = await saeClient.request("POST", RescaleApplicationUri, queries, body, headers, requestOption);
             return data;
         }
@@ -56,10 +55,10 @@ export default class Client {
          * @returns 操作结果
          */
         saeClient.upgradeApplication = async function (appId: string, image: string) {
-            const queries = {
+            const body = JSON.stringify({
                 "appId": appId,
                 "image": image,
-            };
+            });
             const data = await saeClient.request("POST", UpgradeApplicationUri, queries, body, headers, requestOption);
             return data;
         }
