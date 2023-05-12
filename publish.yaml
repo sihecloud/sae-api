@@ -27,3 +27,17 @@ Properties:
     Default: ""
     Type:
       - String
+  image:
+    Description: 镜像地址
+    Required: false
+    Example: redis
+    Default: ""
+    Type:
+      - String
+  replica:
+    Description: 副本数目
+    Required: false
+    Example: 3
+    Default: "-"
+    Type:
+      - Number

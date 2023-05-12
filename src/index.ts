@@ -7,7 +7,7 @@ import Client from './lib/client';
 import * as inputHandler from './lib/input-handler';
 
 export default class ComponentDemo {
-  endpoint = "http://localhost:8000";
+  endpoint = "http://localhost:8080";
   /**
    * 列出应用列表
    * @param inputs
@@ -16,8 +16,8 @@ export default class ComponentDemo {
   public async list(inputs: InputProps) {
     logger.debug(`input: ${JSON.stringify(inputs)}`);
 
-    const { args, props: { application } } = inputs;
-    const { isHelp } = await inputHandler.handleInputs(args, application);
+    const { args } = inputs;
+    const { isHelp } = await inputHandler.handleInputs(args);
     if (isHelp) {
       core.help(HELP.LIST);
       return;
@@ -37,8 +37,8 @@ export default class ComponentDemo {
   public async upgrade(inputs: InputProps) {
     logger.debug(`input: ${JSON.stringify(inputs)}`);
 
-    const { args, props: { application } } = inputs;
-    const { isHelp, appId, image } = await inputHandler.handleInputs(args, application);
+    const { args, props } = inputs;
+    const { isHelp, appId, image } = await inputHandler.handleInputs(args, props);
     if (isHelp) {
       core.help(HELP.LIST);
       return;
@@ -64,8 +64,8 @@ export default class ComponentDemo {
   public async rescale(inputs: InputProps) {
     logger.debug(`input: ${JSON.stringify(inputs)}`);
 
-    const { args, props: { application } } = inputs;
-    const { isHelp, appId, replica } = await inputHandler.handleInputs(args, application);
+    const { args, props } = inputs;
+    const { isHelp, appId, replica } = await inputHandler.handleInputs(args, props);
     if (isHelp) {
       core.help(HELP.LIST);
       return;
