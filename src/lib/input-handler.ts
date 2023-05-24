@@ -9,8 +9,8 @@ export async function handleInputs(args: string, props?: any) {
     let replica: number;
     if (!lodash.isEmpty(data)) {
         isHelp = data?.h || data?.help;
-        appId = data['appId'].toString(); // 已知问题：给值为负数（如-100）时，得true
-        image = data['image'].toString(); // 已知问题：给值为负数（如-100）时，得true
+        appId = data['appId']?.toString(); // 已知问题：给值为负数（如-100）时，得true
+        image = data['image']?.toString(); // 已知问题：给值为负数（如-100）时，得true
         replica = data['replica'];
     }
     if (lodash.isNil(appId)) { // null or undefined

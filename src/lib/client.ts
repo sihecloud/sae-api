@@ -10,7 +10,7 @@ export default class Client {
             accessKeyId: credentials?.AccessKeyID,
             accessKeySecret: credentials?.AccessKeySecret,
             endpoint: endpoint,
-            apiVersion: "2019-05-06",
+            apiVersion: "v1",
         });
 
         const queries = {};
