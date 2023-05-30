@@ -1,4 +1,6 @@
 import * as core from '@serverless-devs/core';
+const { lodash } = core;
+// import logger from './common/logger';
 // @ts-ignore
 const ROAClient = core.popCore.ROAClient;
 
@@ -55,7 +57,9 @@ export default class Client {
                 "app_id": appId,
                 "replicas": replicas,
             });
-            const data = await saeClient.request("POST", RescaleApplicationUri, queries, body, headers, requestOption);
+            let data = await saeClient.request("POST", RescaleApplicationUri, queries, body, headers, requestOption);
+            if (lodash.isEmpty(data))
+                data = "操作成功";
             return data;
         }
 
@@ -70,7 +74,9 @@ export default class Client {
                 "app_id": appId,
                 "image_url": image,
             });
-            const data = await saeClient.request("POST", UpgradeApplicationUri, queries, body, headers, requestOption);
+            let data = await saeClient.request("POST", UpgradeApplicationUri, queries, body, headers, requestOption);
+            if (lodash.isEmpty(data))
+                data = "操作成功";
             return data;
         }
 
