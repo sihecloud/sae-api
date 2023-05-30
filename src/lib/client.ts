@@ -20,9 +20,9 @@ export default class Client {
         const requestOption = {
             timeout: 30000,
         };
-        const ListApplicationsUri = '/container/v1/sdev';
-        const RescaleApplicationUri = '/container/v1/sdev/replica';
-        const UpgradeApplicationUri = '/container/v1/sdev/image';
+        const ListApplicationsUri = '/api/container/v1/sdev';
+        const RescaleApplicationUri = '/api/container/v1/sdev/replica';
+        const UpgradeApplicationUri = '/api/container/v1/sdev/image';
 
         /**
          * 获取应用列表
@@ -41,7 +41,7 @@ export default class Client {
          */
         saeClient.rescaleApplication = async function (appId: string, replicas: number) {
             const body = JSON.stringify({
-                "appId": appId,
+                "app_id": appId,
                 "replicas": replicas,
             });
             const data = await saeClient.request("POST", RescaleApplicationUri, queries, body, headers, requestOption);
@@ -56,8 +56,8 @@ export default class Client {
          */
         saeClient.upgradeApplication = async function (appId: string, image: string) {
             const body = JSON.stringify({
-                "appId": appId,
-                "image": image,
+                "app_id": appId,
+                "image_url": image,
             });
             const data = await saeClient.request("POST", UpgradeApplicationUri, queries, body, headers, requestOption);
             return data;
