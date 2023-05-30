@@ -22,7 +22,7 @@
 
 `SAE` 组件帮助用户管理思核云提供的 Serverless应用引擎 SAE，通过 `s cli`命令快速完成应用升级和扩缩容。
 
-# 文档相关
+# 组件能力
 
 应用部署（SAE）组件全部支持的能力列表如下：
 
@@ -30,7 +30,7 @@
 - 扩缩容：rescale
 - 更新版本：upgrade
 
-# 基本使用
+# 使用方法
 
 ## 1. 安装Serverless-devs
 
@@ -53,6 +53,8 @@ $ yarn global add @serverless-devs/s
 登录思核云控制台，生成AKSK，然后添加s账户配置。
 
 ```shell
+$ YourAccessID=I1234     # 等号右边替换为你的AK
+$ YourAccessSecret=S5678 # 等号右边替换为你的SK
 $ s config add -a default -kl AccessKeyID,AccessKeySecret -il $YourAccessID,$YourAccessSecret
 $ s config get # 查看账户配置
 ```
@@ -60,20 +62,22 @@ $ s config get # 查看账户配置
 ## 3. 管理SAE应用
 
 查看应用列表：
+
 ```shell
 $ s cli sihecloud/sae-api list
 ```
 
-扩缩容：下述命令将id为123-456的应用，副本数调整为3。
+扩缩容：下述命令将id为 `123-456`的应用，副本数调整为3。
+
 ```shell
 $ s cli sihecloud/sae-api rescale --appId=123-456 --replicas=3
 ```
 
-更新版本：下述命令将id为123-456的应用，镜像版本更新为nginx:latest。
+更新版本：下述命令将id为 `123-456`的应用，镜像版本更新为nginx:latest。
+
 ```shell
 $ s cli sihecloud/sae-api upgrade --appId=123-456 --image=nginx:latest
 ```
-
 
 # 开源许可
 
