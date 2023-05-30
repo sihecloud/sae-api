@@ -70,7 +70,6 @@ var client_1 = __importDefault(require("./lib/client"));
 var inputHandler = __importStar(require("./lib/input-handler"));
 var ComponentDemo = /** @class */ (function () {
     function ComponentDemo() {
-        this.endpoint = "http://localhost:8080";
     }
     /**
      * 列出应用列表
@@ -80,28 +79,28 @@ var ComponentDemo = /** @class */ (function () {
     ComponentDemo.prototype.list = function (inputs) {
         var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var args, isHelp, credentials, data;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var args, _b, isHelp, cluster, credentials, data;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         logger_1.default.debug("input: ".concat(JSON.stringify(inputs)));
                         args = inputs.args;
                         return [4 /*yield*/, inputHandler.handleInputs(args)];
                     case 1:
-                        isHelp = (_b.sent()).isHelp;
+                        _b = _c.sent(), isHelp = _b.isHelp, cluster = _b.cluster;
                         if (isHelp) {
                             core.help(HELP.LIST);
                             return [2 /*return*/];
                         }
                         return [4 /*yield*/, core.getCredential((_a = inputs.project) === null || _a === void 0 ? void 0 : _a.access)];
                     case 2:
-                        credentials = _b.sent();
-                        return [4 /*yield*/, client_1.default.setSaeClient(this.endpoint, credentials)];
+                        credentials = _c.sent();
+                        return [4 /*yield*/, client_1.default.setSaeClient(cluster, credentials)];
                     case 3:
-                        _b.sent();
+                        _c.sent();
                         return [4 /*yield*/, client_1.default.saeClient.listApplications()];
                     case 4:
-                        data = _b.sent();
+                        data = _c.sent();
                         return [2 /*return*/, data];
                 }
             });
@@ -115,7 +114,7 @@ var ComponentDemo = /** @class */ (function () {
     ComponentDemo.prototype.upgrade = function (inputs) {
         var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var args, props, _b, isHelp, appId, image, credentials, data;
+            var args, props, _b, isHelp, cluster, appId, image, credentials, data;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -123,7 +122,7 @@ var ComponentDemo = /** @class */ (function () {
                         args = inputs.args, props = inputs.props;
                         return [4 /*yield*/, inputHandler.handleInputs(args, props)];
                     case 1:
-                        _b = _c.sent(), isHelp = _b.isHelp, appId = _b.appId, image = _b.image;
+                        _b = _c.sent(), isHelp = _b.isHelp, cluster = _b.cluster, appId = _b.appId, image = _b.image;
                         if (isHelp) {
                             core.help(HELP.LIST);
                             return [2 /*return*/];
@@ -137,7 +136,7 @@ var ComponentDemo = /** @class */ (function () {
                         return [4 /*yield*/, core.getCredential((_a = inputs.project) === null || _a === void 0 ? void 0 : _a.access)];
                     case 2:
                         credentials = _c.sent();
-                        return [4 /*yield*/, client_1.default.setSaeClient(this.endpoint, credentials)];
+                        return [4 /*yield*/, client_1.default.setSaeClient(cluster, credentials)];
                     case 3:
                         _c.sent();
                         return [4 /*yield*/, client_1.default.saeClient.upgradeApplication(appId, image)];
@@ -156,7 +155,7 @@ var ComponentDemo = /** @class */ (function () {
     ComponentDemo.prototype.rescale = function (inputs) {
         var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var args, props, _b, isHelp, appId, replica, credentials, data;
+            var args, props, _b, isHelp, cluster, appId, replica, credentials, data;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -164,7 +163,7 @@ var ComponentDemo = /** @class */ (function () {
                         args = inputs.args, props = inputs.props;
                         return [4 /*yield*/, inputHandler.handleInputs(args, props)];
                     case 1:
-                        _b = _c.sent(), isHelp = _b.isHelp, appId = _b.appId, replica = _b.replica;
+                        _b = _c.sent(), isHelp = _b.isHelp, cluster = _b.cluster, appId = _b.appId, replica = _b.replica;
                         if (isHelp) {
                             core.help(HELP.LIST);
                             return [2 /*return*/];
@@ -181,7 +180,7 @@ var ComponentDemo = /** @class */ (function () {
                         return [4 /*yield*/, core.getCredential((_a = inputs.project) === null || _a === void 0 ? void 0 : _a.access)];
                     case 2:
                         credentials = _c.sent();
-                        return [4 /*yield*/, client_1.default.setSaeClient(this.endpoint, credentials)];
+                        return [4 /*yield*/, client_1.default.setSaeClient(cluster, credentials)];
                     case 3:
                         _c.sent();
                         return [4 /*yield*/, client_1.default.saeClient.rescaleApplication(appId, replica)];
@@ -195,4 +194,4 @@ var ComponentDemo = /** @class */ (function () {
     return ComponentDemo;
 }());
 exports.default = ComponentDemo;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDJEQUFxQztBQUVyQywwREFBOEM7QUFDdEMsSUFBQSxNQUFNLEdBQUssSUFBSSxPQUFULENBQVU7QUFDeEIsK0NBQW1DO0FBQ25DLHdEQUFrQztBQUNsQyxnRUFBb0Q7QUFFcEQ7SUFBQTtRQUNFLGFBQVEsR0FBRyx1QkFBdUIsQ0FBQztJQThFckMsQ0FBQztJQTdFQzs7OztPQUlHO0lBQ1UsNEJBQUksR0FBakIsVUFBa0IsTUFBa0I7Ozs7Ozs7d0JBQ2xDLGdCQUFNLENBQUMsS0FBSyxDQUFDLGlCQUFVLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLENBQUUsQ0FBQyxDQUFDO3dCQUV6QyxJQUFJLEdBQUssTUFBTSxLQUFYLENBQVk7d0JBQ0wscUJBQU0sWUFBWSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsRUFBQTs7d0JBQWhELE1BQU0sR0FBSyxDQUFBLFNBQXFDLENBQUEsT0FBMUM7d0JBQ2QsSUFBSSxNQUFNLEVBQUU7NEJBQ1YsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7NEJBQ3JCLHNCQUFPO3lCQUNSO3dCQUVtQixxQkFBTSxJQUFJLENBQUMsYUFBYSxDQUFDLE1BQUEsTUFBTSxDQUFDLE9BQU8sMENBQUUsTUFBTSxDQUFDLEVBQUE7O3dCQUE5RCxXQUFXLEdBQUcsU0FBZ0Q7d0JBQ3BFLHFCQUFNLGdCQUFNLENBQUMsWUFBWSxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUUsV0FBVyxDQUFDLEVBQUE7O3dCQUFyRCxTQUFxRCxDQUFDO3dCQUMzQyxxQkFBTSxnQkFBTSxDQUFDLFNBQVMsQ0FBQyxnQkFBZ0IsRUFBRSxFQUFBOzt3QkFBaEQsSUFB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDJEQUFxQztBQUVyQywwREFBOEM7QUFDdEMsSUFBQSxNQUFNLEdBQUssSUFBSSxPQUFULENBQVU7QUFDeEIsK0NBQW1DO0FBQ25DLHdEQUFrQztBQUNsQyxnRUFBb0Q7QUFFcEQ7SUFBQTtJQThFQSxDQUFDO0lBN0VDOzs7O09BSUc7SUFDVSw0QkFBSSxHQUFqQixVQUFrQixNQUFrQjs7Ozs7Ozt3QkFDbEMsZ0JBQU0sQ0FBQyxLQUFLLENBQUMsaUJBQVUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLENBQUMsQ0FBRSxDQUFDLENBQUM7d0JBRXpDLElBQUksR0FBSyxNQUFNLEtBQVgsQ0FBWTt3QkFDSSxxQkFBTSxZQUFZLENBQUMsWUFBWSxDQUFDLElBQUksQ0FBQyxFQUFBOzt3QkFBM0QsS0FBc0IsU0FBcUMsRUFBekQsTUFBTSxZQUFBLEVBQUUsT0FBTyxhQUFBO3dCQUN2QixJQUFJLE1BQU0sRUFBRTs0QkFDVixJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQzs0QkFDckIsc0JBQU87eUJBQ1I7d0JBRW1CLHFCQUFNLElBQUksQ0FBQyxhQUFhLENBQUMsTUFBQSxNQUFNLENBQUMsT0FBTywwQ0FBRSxNQUFNLENBQUMsRUFBQTs7d0JBQTlELFdBQVcsR0FBRyxTQUFnRDt3QkFDcEUscUJBQU0sZ0JBQU0sQ0FBQyxZQUFZLENBQUMsT0FBTyxFQUFFLFdBQVcsQ0FBQyxFQUFBOzt3QkFBL0MsU0FBK0MsQ0FBQzt3QkFDckMscUJBQU0sZ0JBQU0sQ0FBQyxTQUFTLENBQUMsZ0JBQWdCLEVBQUUsRUFBQTs7d0JBQWhELElBQUksR0FBRyxTQUF5Qzt3QkFDcEQsc0JBQU8s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

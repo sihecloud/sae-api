@@ -20,6 +20,13 @@ Commands: # 指令，格式为指令：指令描述，例如：
   upgrade: 版本更新
   rescale: 扩容缩容
 Properties:
+  cluster:
+    Description: 集群环境
+    Required: false
+    Example: prod
+    Default: prod
+    Type:
+      - String
   appId:
     Description: 应用ID
     Required: false

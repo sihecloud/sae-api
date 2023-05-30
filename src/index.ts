@@ -7,7 +7,6 @@ import Client from './lib/client';
 import * as inputHandler from './lib/input-handler';
 
 export default class ComponentDemo {
-  endpoint = "http://localhost:8080";
   /**
    * 列出应用列表
    * @param inputs
@@ -17,14 +16,14 @@ export default class ComponentDemo {
     logger.debug(`input: ${JSON.stringify(inputs)}`);
 
     const { args } = inputs;
-    const { isHelp } = await inputHandler.handleInputs(args);
+    const { isHelp, cluster } = await inputHandler.handleInputs(args);
     if (isHelp) {
       core.help(HELP.LIST);
       return;
     }
     
     const credentials = await core.getCredential(inputs.project?.access);
-    await Client.setSaeClient(this.endpoint, credentials);
+    await Client.setSaeClient(cluster, credentials);
     let data = await Client.saeClient.listApplications();
     return data;
   }
@@ -38,7 +37,7 @@ export default class ComponentDemo {
     logger.debug(`input: ${JSON.stringify(inputs)}`);
 
     const { args, props } = inputs;
-    const { isHelp, appId, image } = await inputHandler.handleInputs(args, props);
+    const { isHelp, cluster, appId, image } = await inputHandler.handleInputs(args, props);
     if (isHelp) {
       core.help(HELP.LIST);
       return;
@@ -51,7 +50,7 @@ export default class ComponentDemo {
     }
 
     const credentials = await core.getCredential(inputs.project?.access);
-    await Client.setSaeClient(this.endpoint, credentials);
+    await Client.setSaeClient(cluster, credentials);
     let data = await Client.saeClient.upgradeApplication(appId, image);
     return data;
   }
@@ -65,7 +64,7 @@ export default class ComponentDemo {
     logger.debug(`input: ${JSON.stringify(inputs)}`);
 
     const { args, props } = inputs;
-    const { isHelp, appId, replica } = await inputHandler.handleInputs(args, props);
+    const { isHelp, cluster, appId, replica } = await inputHandler.handleInputs(args, props);
     if (isHelp) {
       core.help(HELP.LIST);
       return;
@@ -81,7 +80,7 @@ export default class ComponentDemo {
     }
 
     const credentials = await core.getCredential(inputs.project?.access);
-    await Client.setSaeClient(this.endpoint, credentials);
+    await Client.setSaeClient(cluster, credentials);
     let data = await Client.saeClient.rescaleApplication(appId, replica);
     return data;
   }

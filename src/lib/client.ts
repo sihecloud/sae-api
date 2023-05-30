@@ -5,7 +5,18 @@ const ROAClient = core.popCore.ROAClient;
 export default class Client {
     static saeClient: any;
 
-    static async setSaeClient(endpoint, credentials) {
+    static async setSaeClient(cluster, credentials) {
+        let endpoint = "https://mono-backend.sihe.cloud";
+        if (cluster == "staging") {
+            endpoint = "https://mono-backend.staging.sihe6.com";
+        }else if (cluster == "qa") {
+            endpoint = "http://mono-backend-0.qa.sihe6.com";
+        } else if (cluster == "dev" || cluster == "local") {
+            endpoint = "http://localhost:8080";
+        } else if (cluster?.length > 0) {
+            endpoint = cluster;
+        }
+
         const saeClient = new ROAClient({
             accessKeyId: credentials?.AccessKeyID,
             accessKeySecret: credentials?.AccessKeySecret,
