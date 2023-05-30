@@ -64,7 +64,7 @@ export default class ComponentDemo {
     logger.debug(`input: ${JSON.stringify(inputs)}`);
 
     const { args, props } = inputs;
-    const { isHelp, cluster, appId, replica } = await inputHandler.handleInputs(args, props);
+    const { isHelp, cluster, appId, replicas } = await inputHandler.handleInputs(args, props);
     if (isHelp) {
       core.help(HELP.LIST);
       return;
@@ -72,16 +72,16 @@ export default class ComponentDemo {
     if (lodash.isNil(appId)) {
       throw new core.CatchableError('参数 appId 不能为空');
     }
-    if (lodash.isNil(replica)) {
-      throw new core.CatchableError('参数 replica 不能为空');
+    if (lodash.isNil(replicas)) {
+      throw new core.CatchableError('参数 replicas 不能为空');
     }
-    if (!lodash.isInteger(replica)) {
-      throw new core.CatchableError('参数 replica 需要为自然数');
+    if (!lodash.isInteger(replicas)) {
+      throw new core.CatchableError('参数 replicas 需要为自然数');
     }
 
     const credentials = await core.getCredential(inputs.project?.access);
     await Client.setSaeClient(cluster, credentials);
-    let data = await Client.saeClient.rescaleApplication(appId, replica);
+    let data = await Client.saeClient.rescaleApplication(appId, replicas);
     return data;
   }
 }

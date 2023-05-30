@@ -41,7 +41,7 @@ Properties:
     Default: ""
     Type:
       - String
-  replica:
+  replicas:
     Description: 副本数目
     Required: false
     Example: 3

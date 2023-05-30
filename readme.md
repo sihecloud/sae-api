@@ -1,76 +1,86 @@
-# 插件开发说明
+<h1 align="center">思核云 SAE 应用部署组件</h1>
+<p align="center" class="flex justify-center">
+  <a href="https://nodejs.org/en/" class="ml-1">
+    <img src="https://img.shields.io/badge/node-%3E%3D%2010.8.0-brightgreen" alt="node.js version">
+  </a>
+  <a href="https://github.com/sihecloud/sae-api/blob/master/LICENSE" class="ml-1">
+    <img src="https://img.shields.io/badge/License-MIT-green" alt="license">
+  </a>
+  <a href="https://github.com/sihecloud/sae-api/issues" class="ml-1">
+    <img src="https://img.shields.io/github/issues/devsapp/sae" alt="issues">
+  </a>
+  </a>
+</p>
 
-<p align="center"><b> 中文 | <a href="./readme_en.md"> English </a>  </b></p>
+# 思核云
 
-> Serverless Devs 组件开发需要严格遵守 [Serverless Package Model](../../spec/zh/0.0.2/serverless_package_model/readme.md) 中的 [组件模型规范](../../spec/zh/0.0.2/serverless_package_model/3.package_model.md#组件模型规范)。在[组件模型规范](../../spec/zh/0.0.2/serverless_package_model/3.package_model.md#组件模型规范)中有关于[组件模型元数据](../../spec/zh/0.0.2/serverless_package_model/3.package_model.md#组件模型元数据)和[组件模型代码规范](../../spec/zh/0.0.2/serverless_package_model/3.package_model.md#组件模型代码规范)的说明。
+![思核云](https://console.sihe.cloud/assets/sihe-logo-03921f6b.png)
 
-> 🐵 温馨提示，在进行 Serverless Devs 的组件开发时，可能会遇到很多相对来说更为通用的能力，包括不限于：
-> - 获取用户的密钥信息
-> - 进行更规范的格式化输出
-> - 对用户的输入参数进行解析   
-> ......   
-> 这些内容都可以通过 Serverless Devs 所提供的 [Core包](https://github.com/Serverless-Devs/core) 进行提供，更多 [Core包](https://github.com/Serverless-Devs/core) 信息，可以参考 [Core包的开发文档](https://github.com/Serverless-Devs/core)
+[思核云计算控制台](https://console.sihe.cloud/)
 
-Serverless Devs的组件开发案例已经被集成到Serverless Devs命令行工具中，通过对Serverless Devs的命令行工具，可以进行空白组件项目的初始化，开发者只需要执行`s init`即可看到：
+# 组件简介
 
-```shell script
+`SAE` 组件帮助用户管理思核云提供的 Serverless应用引擎 SAE，通过 `s cli`命令快速完成应用升级和扩缩容。
 
-🚀 Serverless Awesome: https://github.com/Serverless-Devs/package-awesome
+# 文档相关
 
-? Hello Serverless for Cloud Vendors (Use arrow keys or type to search)
-❯ Alibaba Cloud Serverless 
-  AWS Cloud Serverless 
-  Tencent Cloud Serverless 
-  Baidu Cloud Serverless 
-  Dev Template for Serverless Devs 
+应用部署（SAE）组件全部支持的能力列表如下：
+
+- 应用列表：list
+- 扩缩容：rescale
+- 更新版本：upgrade
+
+# 基本使用
+
+## 1. 安装Serverless-devs
+
+通过 [npm](https://www.npmjs.com/) 包管理安装：适用于已经预装了 npm 的 Windows、Mac、Linux 平台。在 Windows、Mac、Linux 平台执行以下命令安装 Serverless Devs Tool工具。
+
+```shell
+$ npm install @serverless-devs/s -g
 ```
 
-此时，选择最后的`Dev Template for Serverless Devs`，并按回车：
+或者 通过 [yarn](https://yarnpkg.com/) 进行安装
 
-```shell script
-$ s init
-
-🚀 Serverless Awesome: https://github.com/Serverless-Devs/package-awesome
-
-? Hello Serverless for Cloud Vendors Dev Template for Serverless Devs
-? Please select an Serverless-Devs Application (Use arrow keys or type to search)
-❯ Application Scaffolding 
-  Component Scaffolding 
+```shell
+$ yarn global add @serverless-devs/s
 ```
 
-此时，选择`Component Scaffolding`，并按回车，即可完成一个完整的Serverless Devs的Component项目的初始化，可以通过命令查看文件树：
+更多安装方式请参考 [Serverless-devs 文档](https://docs.serverless-devs.com/serverless-devs/install)。
 
-```shell script
-$ find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
-.
-|____LICENSE
-|____.signore
-|____example
-| |____s.yaml
-|____readme.md
-|____publish.yaml
-|____.gitignore
-|____package.json
-|____tsconfig.json
-|____src
-| |____common
-| | |____entity.ts
-| | |____logger.ts
-| |____index.ts
+## 2. 配置AKSK
+
+登录思核云控制台，生成AKSK，然后添加s账户配置。
+
+```shell
+$ s config add -a default -kl AccessKeyID,AccessKeySecret -il $YourAccessID,$YourAccessSecret
+$ s config get # 查看账户配置
 ```
 
-这其中：
+## 3. 管理SAE应用
 
-| 目录 | 含义 |
-| --- | --- | 
-| LICENSE | 项目默认的LICENSE，默认的LICENSE是遵循MIT开源协议的（推荐） | 
-| .signore | 项目发布时，可以选择的忽略文件，类似于npm发布是的`.npmignore`文件 | 
-| example | 该组件对应的测试应用 | 
-| publish.yaml | 项目所必须的文件，Serverless Devs Package的开发识别文档 |
-| .gitignore| 推送到Github的忽略文件 | 
-| package.json| Node.js的package.json，需要描述清楚组件的入口文件位置 |
-| tsconfig.json| Typescript的tsconfig.json，用来对TS项目进行描述等 |
-| src| 用户的代码目录 |
-| readme.md| 版本的描述，例如当前版本的更新内容等 |
+查看应用列表：
+```shell
+$ s cli sihecloud/sae-api list
+```
 
-此时，开发者可以在src下完成业务代码的开发，由于默认的初始化项目是Typescript，所以开发完成业务代码还需要编译成Javascript（可以通过`npm run build`进行编译），在完成项目编译之后，还需要对项目进行`publish.yaml`文件的编写。完成之后，即可将项目发不到不同的源，以Github Registry为例，可以在Github创建一个`Public`的仓库，并将编译后的代码放到仓库，并发布一个版本。此时，就可以通过客户端获取到该应用。
+扩缩容：下述命令将id为123-456的应用，副本数调整为3。
+```shell
+$ s cli sihecloud/sae-api rescale --appId=123-456 --replicas=3
+```
+
+更新版本：下述命令将id为123-456的应用，镜像版本更新为nginx:latest。
+```shell
+$ s cli sihecloud/sae-api upgrade --appId=123-456 --image=nginx:latest
+```
+
+
+# 开源许可
+
+Serverless Devs SEA 组件遵循 [MIT License](./LICENSE) 开源许可。
+
+位于 `node_modules`和外部目录中的所有文件都是本软件使用的外部维护库，具有自己的许可证；我们建议您阅读它们，因为它们的条款可能与[MIT License](./LICENSE)的条款不同。
+
+# 交流社区
+
+您如果有关于错误的反馈或者未来的期待，您可以在 [SAE-API repo Issues](https://github.com/sihecloud/sae-api/issues) 中进行反馈和交流。

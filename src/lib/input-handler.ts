@@ -7,13 +7,13 @@ export async function handleInputs(args: string, props?: any) {
     let isHelp = false;
     let cluster: string;
     let appId, image: string;
-    let replica: number;
+    let replicas: number;
     if (!lodash.isEmpty(data)) {
         isHelp = data?.h || data?.help;
         cluster = data['cluster']?.toString();
         appId = data['appId']?.toString(); // 已知问题：给值为负数（如-100）时，得true
         image = data['image']?.toString(); // 已知问题：给值为负数（如-100）时，得true
-        replica = data['replica'];
+        replicas = data['replicas'];
     }
     if (lodash.isNil(cluster)) { // null or undefined
         cluster = props?.cluster;
@@ -24,8 +24,8 @@ export async function handleInputs(args: string, props?: any) {
     if (lodash.isNil(image)) { // null or undefined
         image = props?.image;
     }
-    if (lodash.isNil(replica)) { // null or undefined
-        replica = props?.replica;
+    if (lodash.isNil(replicas)) { // null or undefined
+        replicas = props?.replicas;
     }
-    return {isHelp, cluster, appId, image, replica};
+    return {isHelp, cluster, appId, image, replicas};
 }
