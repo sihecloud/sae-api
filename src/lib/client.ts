@@ -33,7 +33,7 @@ export default class Client {
         const requestOption = {
             timeout: 30000,
         };
-        const ListApplicationsUri = '/api/container/v1/sdev';
+        const ListApplicationsUri   = '/api/container/v1/sdev/list';
         const RescaleApplicationUri = '/api/container/v1/sdev/replica';
         const UpgradeApplicationUri = '/api/container/v1/sdev/image';
 
