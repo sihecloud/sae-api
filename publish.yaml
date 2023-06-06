@@ -5,8 +5,8 @@
 Type: Component
 Name: sae-api
 Provider:
-  - 思核云
-Version: 0.0.1
+  - 其它
+Version: 0.0.2
 Description: 思核云SAE组件：可以通过命令行调整SAE
 HomePage: https://github.com/sihecloud/sae-api
 Tags: #标签详情
@@ -14,6 +14,7 @@ Tags: #标签详情
   - SAE
   - 更改镜像
   - 扩容缩容
+  - 思核云
 Category: 基础云服务 # 基础云服务/Web框架/全栈应用/人工智能/音视频处理/图文处理/监控告警/大数据/IoT/新手入门/其它/开源项目
 Commands: # 指令，格式为指令：指令描述，例如：
   list: 列出应用列表

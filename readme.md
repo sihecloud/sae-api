@@ -64,19 +64,19 @@ $ s config get # 查看账户配置
 查看应用列表：
 
 ```shell
-$ s cli sihecloud/sae-api list
+$ s cli sae-api list
 ```
 
 扩缩容：下述命令将id为 `123-456`的应用，副本数调整为3。
 
 ```shell
-$ s cli sihecloud/sae-api rescale --appId=123-456 --replicas=3
+$ s cli sae-api rescale --appId=123-456 --replicas=3
 ```
 
 更新版本：下述命令将id为 `123-456`的应用，镜像版本更新为nginx:latest。
 
 ```shell
-$ s cli sihecloud/sae-api upgrade --appId=123-456 --image=nginx:latest
+$ s cli sae-api upgrade --appId=123-456 --image=nginx:latest
 ```
 
 # 开源许可
